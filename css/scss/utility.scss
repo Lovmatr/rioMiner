@@ -24,27 +24,39 @@ Primary Use:    Hyip Investment Website
 -------------------------------------------*/
 
 // Veriables
-$primary: #ff237d;
-$black: #231f40;
-$blue: #046494;
-$blue2: #40d9bd;
-$blue3: #22223b;
-$gray: #d2d3d8;
-$light-gray: #f7f7f7;
-$red: #e91e63;
-$yellow: #ffc300;
-$light-yellow: #f9f2e8;
-$light-blue: #bee3db;
-$green: #157240;
-$polis: #37ff4f;
-$white: #ffffff;
+// Solid Colors
+$primary-background: #000534;
+$secondary-background: #0f1738;
+$accent-orange: #fb923c;
 
-$grad-bg: linear-gradient(95deg, #059dff 15%, #6549d5 45%, #e33fa1 75%, #fb5343) 95%/200% 100%;
-$grad-bg-2: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-$grad-bg-3: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
-$grad-bg-4: linear-gradient(90deg, #1b623c, #00a92f);
-$grad-bg-5: linear-gradient(270deg, #9e77ff 0%, #4460ff 100%);
-$grad-bg-6: linear-gradient(135deg, #21e9ca 0%, #75ed6d 100%);
+// Existing variables - map or replace as needed
+$primary: $accent-orange; // Assuming accent orange is the new primary interactive color
+$black: #000000; // Standard black
+$white: #ffffff; // Standard white
+$blue: #2562ea; // Primary Blue Gradient (Bright Blue) - for general blue usage
+$blue2: #1d4ed8; // Primary Blue Gradient (Darker Blue)
+$blue3: $secondary-background; // Using secondary background for dark elements
+$gray: #d2d3d8; // Keep for now, might replace with shades of new blues/grays
+$light-gray: #f7f7f7; // Keep for now
+$red: #e91e63; // Keep for now, or choose a new red if specified
+$yellow: #ffc300; // Keep for now, or choose a new yellow if specified
+$light-yellow: #f9f2e8; // Keep for now
+$light-blue: #5fa7f4; // Green & Blue Gradient (Sky Blue)
+$green: #4bdb86; // Green & Blue Gradient (Sea Green)
+$polis: #37ff4f; // Keep or replace if a similar accent is in the new scheme
+
+// Gradients
+$gradient-green-blue: linear-gradient(to right, #5fa7f4, #4bdb86);
+$gradient-primary-blue: linear-gradient(to right, #2562ea, #1d4ed8);
+$gradient-start-mining: linear-gradient(to right, #f97316, #eb590d);
+
+// Mapping old gradient variables to new ones or removing if not directly applicable
+$grad-bg: $gradient-primary-blue; // Example: mapping to primary blue gradient
+$grad-bg-2: $gradient-green-blue; // Example: mapping to green-blue gradient
+$grad-bg-3: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%); // Keep or update if a similar radial gradient is needed
+$grad-bg-4: $gradient-start-mining; // Example: mapping to start mining gradient
+$grad-bg-5: linear-gradient(270deg, #9e77ff 0%, #4460ff 100%); // Keep or update
+$grad-bg-6: $gradient-green-blue; // Example: mapping to green-blue gradient for consistency
 
 /* Font Family Euclid Circular A */
 
@@ -951,6 +963,20 @@ img {
         border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
         transform: translate3d(0, -5px, 0) rotateZ(0.01deg);
     }
+}
+
+/* Animated Shadow Effect */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+    }
+}
+
+.animated-shadow {
+    animation: glow 2s infinite ease-in-out;
 }
 
 /* Particle Js */

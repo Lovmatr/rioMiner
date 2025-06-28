@@ -1,110 +1,77 @@
+@use "sass:color";
 @import "utility";
 /* Dark Theme */
 .dark-theme {
     color: rgba($white, $alpha: 0.9);
-    background: #032836;
+    background: $primary-background; // Use new primary background
 
     .panel-layout {
+        background: $primary-background; // Ensure panel itself has the base bg
         .panel-header {
             .logo {
-                background: $blue;
-                border-right: 1px solid rgba($blue3, $alpha: 0.5);
-                border-bottom: 1px solid rgba($blue3, $alpha: 0.5);
+                background: $primary-background; // Logo area bg
+                border-right: 1px solid rgba($accent-orange, $alpha: 0.2);
+                border-bottom: 1px solid rgba($accent-orange, $alpha: 0.2);
             }
 
             .nav-wrap {
-                background: $blue;
-                border-bottom: 1px solid rgba($blue3, $alpha: 0.5);
+                background: $secondary-background; // Nav wrap slightly different
+                border-bottom: 1px solid rgba($accent-orange, $alpha: 0.2);
 
                 .nav-left {
                     .sidebar-toggle {
-                        background: $blue3;
-                        color: $white;
-
-                        &:hover {
-                            background: $primary;
-                            color: $white;
-                        }
+                        background: rgba($accent-orange, $alpha:0.2);
+                        color: $accent-orange;
+                        &:hover { background: $accent-orange; color: $white; }
                     }
                 }
 
                 .nav-right {
                     .single-nav-right {
                         .single-right {
-                            .color-switcher {
+                            .color-switcher { // This button switches to light theme
                                 color: $white;
-
                                 svg {
-                                    &.light-icon {
-                                        display: inline-block;
-                                    }
-
-                                    &.dark-icon {
-                                        display: none;
-                                    }
+                                    &.light-icon { display: inline-block; }
+                                    &.dark-icon { display: none; }
                                 }
                             }
 
-                            .site-nice-select {
+                            .site-nice-select { // Custom select in header
                                 color: rgba($white, $alpha: 0.9);
-                                background: $blue3;
-                                border: 1px solid rgba($primary, $alpha: 0.1);
-
-                                &::after {
-                                    border-bottom: 2px solid rgba($white, $alpha: 0.5);
-                                    border-right: 2px solid rgba($white, $alpha: 0.5);
-                                }
-
+                                background: $primary-background; // Darker select bg
+                                border: 1px solid rgba($accent-orange, $alpha: 0.2);
+                                &::after { border-color: rgba($white, $alpha: 0.5); }
                                 .list {
-                                    box-shadow: 0px 0px 2px #aab0c6;
-                                    background: rgba($black, $alpha: 0.8);
-
+                                    background: $primary-background; // Dropdown list bg
+                                    border:1px solid $accent-orange;
                                     li {
-                                        background: rgba($black, $alpha: 0.8);
-
-                                        &:hover {
-                                            background: $primary;
-                                        }
+                                        color:$white; // Option text
+                                        &:hover { background: rgba($accent-orange,0.2); color:$accent-orange; }
+                                        &.selected { background:$accent-orange; color:$white;}
                                     }
                                 }
                             }
 
-                            .item {
-                                background: $blue3;
-                                border: 1px solid rgba($primary, $alpha: 0.1);
+                            .item { // Generic header item/button
+                                background: $primary-background;
+                                border: 1px solid rgba($accent-orange, $alpha: 0.2);
                                 color: rgba($white, $alpha: 0.9);
-
-                                &:hover {
-                                    background: rgba($primary, $alpha: 0.9);
-                                    color: $white;
-                                }
+                                &:hover { background: $accent-orange; color: $white; }
                             }
 
-                            .dropdown-menu {
-                                box-shadow: 0px 0px 2px #aab0c6;
-                                background: rgba($black, $alpha: 0.9);
-
+                            .dropdown-menu { // User/profile dropdown
+                                background: $secondary-background; // Dropdown bg
+                                border: 1px solid $accent-orange;
                                 li {
                                     .dropdown-item {
                                         color: $white;
-
-                                        &:hover {
-                                            background: $primary;
-                                            color: $white;
-                                        }
+                                        &:hover { background: $accent-orange; color: $white; }
                                     }
-
-                                    &.logout {
-                                        .dropdown-item {
-                                            background: rgba($red, $alpha: 0.1);
-                                            color: $red;
-                                            border-radius: 0 0 4px 4px;
-
-                                            &:hover {
-                                                background: $red;
-                                                color: $white;
-                                            }
-                                        }
+                                    &.logout .dropdown-item { // Logout specific
+                                        background: rgba($red, $alpha: 0.2); // Keep red for logout
+                                        color: $red;
+                                        &:hover { background: $red; color: $white; }
                                     }
                                 }
                             }
@@ -114,969 +81,428 @@
             }
         }
 
-        .side-nav {
-            background: $blue;
-            border-right: 1px solid rgba($blue3, $alpha: 0.5);
+        .side-nav { // Main sidebar navigation
+            background: $secondary-background; // Sidebar background
+            border-right: 1px solid rgba($accent-orange, $alpha: 0.2);
 
-            .side-nav-inside {
-                .side-nav-menu {
-                    .side-nav-item {
-                        a {
-                            color: rgba($white, $alpha: 0.7);
-
-                            &:after {
-                                background: rgba($white, $alpha: 0.2);
-                            }
-
-                            &:hover {
-                                color: $white;
-                            }
-                        }
-
-                        &.active {
-                            a {
-                                color: $white;
-                            }
-                        }
+            .side-nav-inside .side-nav-menu .side-nav-item {
+                a {
+                    color: rgba($white, $alpha: 0.7);
+                    i { color: $accent-orange; } // Icon color
+                    &:hover {
+                        color: $accent-orange;
+                        background-color: rgba($accent-orange, $alpha:0.1);
                     }
+                     &::after { background: transparent; } // Remove the ::after strip if not needed
                 }
+                &.active a { // Active sidebar link
+                    background: $gradient-primary-blue; // Use gradient for active
+                    color: $white;
+                    i { color: $white; }
+                }
+                &.side-nav-dropdown.show .dropdown-items { // Submenu background
+                    background: $primary-background;
+                    border-top: 1px solid rgba($accent-orange, $alpha:0.1);
+                }
+                 &.category-title { color: rgba($accent-orange, $alpha:0.6); }
             }
         }
 
-        .site-card {
-            background: #041f2c;
-            border: 1px solid rgba($blue3, $alpha: 0.3);
+        .site-card { // Generic card in user panel
+            background: $secondary-background;
+            border: 1px solid rgba($accent-orange, $alpha: 0.2);
 
             .site-card-header {
-                border-bottom: 1px solid rgba($blue, $alpha: 1);
-
-                .title {
-                    color: rgba($white, $alpha: 0.8);
-                }
-
-                .search {
-                    input {
-                        color: $white;
-                        border-color: rgba($color: $white, $alpha: 0.2);
-                    }
+                border-bottom: 1px solid rgba($accent-orange, $alpha: 0.2);
+                .title { color: $white; }
+                .search input {
+                    color: $white;
+                    background: $primary-background;
+                    border-color: rgba($accent-orange, $alpha: 0.3);
+                     &::placeholder { color: rgba($white,0.5); }
+                     &:focus { border-color: $accent-orange; }
                 }
             }
 
             .site-card-body {
-                color: $white;
-
-                .referral-link {
-                    .referral-link-form {
-                        input {
-                            border-color: rgba($color: $white, $alpha: 0.2);
-                            color: $white;
-                        }
-                    }
-
-                    .referral-joined {
-                        color: rgba($white, $alpha: 0.8);
-                    }
-                }
-
-                .progress-steps {
-                    .single-step {
-                        background: rgba($green, $alpha: 0.3);
-                        border-color: rgba($yellow, $alpha: 0.5);
-
-                        .content {
-                            h4 {
-                                color: $white;
-                            }
-                        }
-                    }
-                }
-
-                .progress-steps-form {
-                    label {
+                color: rgba($white, $alpha:0.8);
+                // Specific elements within cards
+                .referral-link .referral-link-form {
+                    input {
+                        border-color: rgba($accent-orange, $alpha: 0.3);
+                        background: $primary-background;
                         color: $white;
+                         &::placeholder { color: rgba($white,0.6); }
                     }
+                     button { // Copy button
+                        background: $accent-orange;
+                        border-color: $accent-orange;
+                        color: $white;
+                        &:hover { background: color.adjust($accent-orange, $lightness: -10%); border-color: color.adjust($accent-orange, $lightness: -10%);}
+                    }
+                }
+                .referral-joined { color: rgba($white, $alpha: 0.6); }
 
+                .progress-steps .single-step { // For multi-step forms
+                    background: $primary-background;
+                    border-color: rgba($accent-orange, $alpha: 0.3);
+                    .content h4 { color: $white; }
+                    .content p { color: rgba($white,0.7); }
+                     &.current { // Active step
+                        background: $gradient-green-blue; // Use a gradient for current step
+                        border-color: $accent-orange;
+                        .number { background:$accent-orange; color:$primary-background;}
+                        .content h4, .content p {color:$white;}
+                    }
+                }
+
+                .progress-steps-form { // Forms associated with progress steps
+                    label { color: rgba($white, $alpha:0.8); }
                     .input-group {
-                        .form-control {
-                            border-color: rgba($color: $white, $alpha: 0.2);
+                        .form-control, .form-control-textarea, .form-select {
+                            border-color: rgba($accent-orange, $alpha: 0.3);
+                            background: $primary-background;
                             color: $white;
+                             &::placeholder {color:rgba($white,0.5);}
+                             &:focus { border-color: $accent-orange; box-shadow: 0 0 5px rgba($accent-orange,0.3); }
                         }
-
                         .input-group-text {
-                            border-color: rgba($color: $white, $alpha: 0.2);
-                            color: $white;
+                            border-color: rgba($accent-orange, $alpha: 0.3);
+                            background: $secondary-background; // Or $primary-background
+                            color: rgba($white, $alpha:0.7);
                         }
-
-                        .form-control-textarea {
-                            border-color: rgba($color: $white, $alpha: 0.2);
-                            color: $white;
-                        }
-
-                        .form-select {
-                            border-color: rgba($color: $white, $alpha: 0.2);
-                            color: $blue;
-                        }
-                    }
-
-                    .transaction-list {
-                        .user-panel-title {
-                            color: $white;
-
-                            h3 {
-                                color: $white;
+                         .site-nice-select { // Custom select in form
+                            border-color: rgba($accent-orange, $alpha: 0.3) !important;
+                            background: $primary-background !important;
+                            .current { color: $white; }
+                            .list { background: $primary-background; border:1px solid $accent-orange;
+                                .option {color:$white; &:hover{background:rgba($accent-orange,0.2); color:$accent-orange;}}
+                                .selected{background:$accent-orange;color:$white;}
                             }
-                        }
-
-                        .table {
-                            color: $white;
-                            border: 1px solid rgba($blue, $alpha: 1);
-
-                            tbody {
-                                tr {
-                                    border-bottom: 1px solid rgba($blue, $alpha: 1);
-
-                                    td {
-                                        strong {
-                                            color: rgba($white, $alpha: 0.7);
-                                        }
-                                    }
-                                }
-                            }
+                             &::after { border-color: rgba($white,0.6); }
                         }
                     }
                 }
+                // Transaction list already styled in main styles, ensure it inherits dark theme well or add specific overrides if needed
+                 .transaction-list .table {
+                     color:rgba($white,0.8);
+                     border-color:rgba($accent-orange,0.2);
+                     thead { background:rgba($accent-orange,0.1); color:$accent-orange; tr th {border-color:$accent-orange;}}
+                     tbody tr { border-color:rgba($accent-orange,0.1); &:hover {background-color:rgba($accent-orange,0.05);}}
+                 }
 
-                .access-device .icon img {
-                    filter: invert(1);
-                }
+                .access-device .icon img { filter: invert(0.8) brightness(1.2) contrast(1.1); } // Adjust filter for dark bg
             }
         }
 
-        .site-alert {
-            background: rgba($blue, $alpha: 0.7);
-            color: rgba($white, $alpha: 0.8);
+        .site-alert { // Alert messages in panel
+            // Use new background variables, ensuring text contrast
+            &.alert-success { background: rgba($green,0.3); border-left: 4px solid $green; color:$white;}
+            &.alert-warning { background: rgba($yellow,0.2); border-left: 4px solid $yellow; color:$white;} // Text was $primary-background
+            &.alert-danger { background: rgba($red,0.2); border-left: 4px solid $red; color:$white;}
+            &.alert-info { background: rgba($blue,0.2); border-left: 4px solid $blue; color:$white;}
         }
 
-        .side-wallet-box {
-            background: $blue;
+        .side-wallet-box { // Wallet display box
+            background: $secondary-background;
             color: rgba($white, $alpha: 0.8);
+            border:1px solid rgba($accent-orange,0.2);
+            box-shadow: 0 0 10px rgba($accent-orange,0.1);
 
             .user-balance-card {
-                &::before {
-                    background: rgba($yellow, $alpha: 0.4);
+                &::before { background: rgba($accent-orange, $alpha: 0.1); } // Decorative circle
+                 &.default-wallet .user-balance-card { // Default wallet card
+                    background: $gradient-primary-blue; // Gradient for default wallet
                 }
+            }
+             .actions .user-sidebar-btn { // Buttons in wallet box
+                background: $gradient-primary-blue;
+                color:$white;
+                &:hover { background: $gradient-start-mining; }
+                &:last-of-type { background: $gradient-green-blue; &:hover { background: $gradient-start-mining;}}
             }
         }
 
-        .btn-link {
-            color: $primary;
+        .btn-link { color: $accent-orange; &:hover {color:color.adjust($accent-orange, $lightness: -10%);} } // Text links
+
+        .site-transactions .single { // Transaction items
+            background: $primary-background; // Item bg
+            border: 1px solid rgba($accent-orange,0.1);
+            box-shadow: none;
+            .left .icon { background: rgba($accent-orange,0.2); color: $accent-orange; }
+            .left .content .date { color: rgba($white, $alpha: 0.5); }
+            &:hover { background: $secondary-background; .left .icon {background:$accent-orange;color:$white;} }
+            &.head { background: $secondary-background; color:$accent-orange; } // Header for transactions
         }
 
-        .site-transactions {
-            .single {
-                background: #041f2c;
-
-                .left {
-                    .icon {
-                        background: $blue;
-                        color: $white;
-                    }
-
-                    .content {
-                        .date {
-                            color: rgba($white, $alpha: 0.4);
-                        }
-                    }
-                }
-
-                &.head {
-                    background: transparent;
-                }
-            }
+        .site-pagination .page-item .page-link { // Pagination
+            color: rgba($white, $alpha: 0.7);
+            background: $primary-background;
+            border-color: rgba($accent-orange, $alpha:0.2);
+             &:hover { background:rgba($accent-orange,0.2); color:$accent-orange;}
         }
-
-        .site-pagination {
-            .page-item {
-                .page-link {
-                    color: rgba($white, $alpha: 0.5);
-                    font-size: 14px;
-                    font-weight: 700;
-                    background: $blue;
-                    border-color: $blue;
-                }
-
-                &.active {
-                    .page-link {
-                        background: $primary;
-                        color: $white;
-                    }
-                }
-            }
+        .site-pagination .page-item.active .page-link {
+            background: $accent-orange;
+            color: $white;
+            border-color: $accent-orange;
         }
     }
 
-    .header {
-        background: #032836;
-
+    // General elements that might appear outside .panel-layout but in .dark-theme
+    .header { // Main site header when dark theme is active
+        background: $primary-background; // Consistent dark header
+        border-bottom-color: rgba($accent-orange,0.2);
         .navbar {
-            .main-nav {
-                .nav-item {
-                    a.nav-link {
-                        color: $white;
-                    }
-
-                    &.dropdown {
-                        .dropdown-menu {
-                            background: #032836;
-
-                            li {
-                                .dropdown-item {
-                                    color: $white;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            .header-right-btn {
-                .color-switcher {
+            .main-nav .nav-item {
+                a.nav-link {
                     color: $white;
-
-                    svg {
-                        &.light-icon {
-                            display: inline-block;
-                        }
-
-                        &.dark-icon {
-                            display: none;
-                        }
+                    &:hover, &.active { color: $accent-orange; }
+                }
+                &.dropdown .dropdown-menu { // Main site nav dropdowns
+                    background: $secondary-background;
+                    border: 1px solid $accent-orange;
+                    li .dropdown-item {
+                        color: $white;
+                        &:hover, &:focus { background: $accent-orange; color: $white; }
                     }
                 }
             }
+            .header-right-btn .color-switcher { color: $white; }
         }
     }
 
-    .banner {
+    .banner { // Main site banner
+        background: $primary-background; // Ensure banner is dark
         .banner-content {
-            &::before {
-                background: rgba($white, $alpha: 0.08);
-            }
-
-            h2 {
-                color: rgba($white, $alpha: 0.9);
-            }
+            &::before { background: rgba($accent-orange, $alpha: 0.05); } // Subtle overlay if used
+            h2 { color: $white; }
+            p { color: rgba($white,0.8); }
         }
     }
 
-    .how-it-works {
-        .how-it-works-single {
-            h4 {
-                color: $white;
-            }
-
-            p {
-                color: rgba($white, $alpha: 0.5);
-            }
-
-            &::before {
-                filter: brightness(0) invert(1);
-                @media (max-width: 575px) {
-                    display: none;
-                }
-            }
-        }
+    .how-it-works .how-it-works-single { // "How it works" cards
+        background: $secondary-background;
+        border:1px solid rgba($accent-orange,0.2);
+        h4 { color: $white; }
+        p { color: rgba($white, $alpha: 0.6); }
+        .icon-box { color: $accent-orange; }
+        &:hover { background: $gradient-green-blue; h4,p{color:$white;} }
+        // &::before { filter... } // Keep if the line image is still relevant
     }
 
-    .why-choose-us {
-        .why-choose-us-content {
-            .single {
-                .content {
-                    h4 {
-                        color: $white;
-                    }
-
-                    p {
-                        color: rgba($white, $alpha: 0.6);
-                    }
-                }
-            }
-        }
-    }
-
-    .faq-contents {
-        .accordion-item {
-            border-bottom: 2px solid rgba($primary, $alpha: 0.2);
-
-            .accordion-header {
-                .accordion-button {
-                    background: rgba($primary, $alpha: 0.1);
-                    color: rgba($white, $alpha: 0.8);
-                }
-
-                .accordion-button:not(.collapsed) {
-                    background: rgba($primary, $alpha: 0.7);
-                    color: $white;
-
-                    .icon {
-                        background: #ffc754e6;
-                        color: $black;
-                    }
-                }
-            }
-
-            .accordion-body {
-                .para {
-                    color: rgba($white, $alpha: 0.6);
-                }
-
-                .list {
-                    ul {
-                        li {
-                            color: rgba($white, $alpha: 0.6);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .single-blog {
-        background: #032836;
-
+    .why-choose-us .why-choose-us-content .single { // "Why choose us" items
         .content {
-            color: rgba($white, $alpha: 0.6);
+            h4 { color: $white; }
+            p { color: rgba($white, $alpha: 0.7); }
+        }
+        .icons .icon { background: $accent-orange; } // Icon bg
+         &:hover .icons .icon { background: $gradient-green-blue; }
+    }
 
-            .title {
-                h3 {
-                    a {
-                        color: $white;
-                    }
+    .faq-contents { // FAQ section
+        .accordion-item {
+            border-bottom: 1px solid rgba($accent-orange, $alpha: 0.2);
+            background: $secondary-background; // Accordion item bg
+            .accordion-header .accordion-button {
+                background: $secondary-background;
+                color: $white;
+                &::after { filter: invert(1); } // Make arrow white
+                &:not(.collapsed) {
+                    background: rgba($accent-orange, $alpha: 0.2);
+                    color: $accent-orange;
+                     &::after { filter: invert(1) sepia(1) saturate(5) hue-rotate(10deg); } // Orange arrow
                 }
             }
-
-            .link {
-                a {
-                    color: $white;
-                }
+            .accordion-body {
+                color: rgba($white, $alpha: 0.7);
+                background: $primary-background; // Slightly different for body
             }
         }
     }
 
-    .brands-logo {
-        .single-brands-logo {
-            img {
-                filter: brightness(0) invert(1);
-            }
+    .single-blog { // Blog cards on homepage/blog page
+        background: $secondary-background;
+        border: 1px solid rgba($accent-orange,0.2);
+        .content {
+            color: rgba($white, $alpha: 0.7);
+            .title h3 a { color: $white; &:hover { color: $accent-orange; }}
+            .link a { color: $accent-orange; &:hover { color: color.adjust($accent-orange, $lightness: -10%);} &::after{background:$accent-orange;}}
         }
     }
 
-    .light-blue-bg {
-        background: $blue;
+    .brands-logo .single-brands-logo img { // Client/partner logos
+        filter: grayscale(100%) brightness(1.8) contrast(0.8); // Make them light/white
+        opacity:0.8;
+        &:hover { filter:grayscale(0%) brightness(1); opacity:1;}
     }
 
-    .dark-blue-bg {
-        background: $blue;
-    }
+    // These were generic color classes from utility, ensure they are not overridden incorrectly
+    .light-blue-bg { background: $secondary-background; }
+    .dark-blue-bg { background: $primary-background; }
 
     .section-title {
-        h4 {
-            color: $yellow;
-        }
+        h2 { color: $white; } // Main section titles
+        h4 { color: $accent-orange; } // Sub-titles/accent titles in sections
     }
 
-    .site-card {
-        background: #041f2c;
+    // Re-check .site-card from utility.scss if used outside .panel-layout
+    // It's already defined within .panel-layout specific block, which is good.
 
-        .site-card-header {
-            border-bottom: 1px solid rgba($blue, $alpha: 1);
+    .single-investment-plan p { // Text in investment plans
+        color: rgba($white, $alpha: 0.7); // Ensure readable text
+    }
 
-            .title {
-                color: rgba($white, $alpha: 0.8);
-            }
-
-            .search {
-                input {
-                    color: $white;
-                    border-color: rgba($color: $white, $alpha: 0.2);
-                }
-            }
-        }
-
-        .site-card-body {
+    .site-datatable { // DataTables general dark theme adjustments
+        .dataTables_length label, .dataTables_filter label, .dataTables_info { color: rgba($white, 0.8); }
+        .dataTables_length select, .dataTables_filter input {
+            background-color: $primary-background;
             color: $white;
-
-            .referral-link {
-                .referral-link-form {
-                    input {
-                        border-color: rgba($color: $white, $alpha: 0.2);
-                        color: $white;
-                    }
-                }
-
-                .referral-joined {
-                    color: rgba($white, $alpha: 0.8);
-                }
-            }
-
-            .progress-steps {
-                .single-step {
-                    background: rgba($green, $alpha: 0.3);
-                    border-color: rgba($yellow, $alpha: 0.5);
-
-                    .content {
-                        h4 {
-                            color: $white;
-                        }
-                    }
-                }
-            }
-
-            .progress-steps-form {
-                label {
-                    color: $white;
-                }
-
-                .input-group {
-                    .form-control {
-                        border-color: rgba($color: $white, $alpha: 0.2);
-                        color: $white;
-                    }
-
-                    .input-group-text {
-                        border-color: rgba($color: $white, $alpha: 0.2);
-                        color: $white;
-                    }
-
-                    .form-control-textarea {
-                        border-color: rgba($color: $white, $alpha: 0.2);
-                        color: $white;
-                    }
-
-                    .form-select {
-                        border-color: rgba($color: $white, $alpha: 0.2);
-                        color: $blue;
-                    }
-                }
-
-                .transaction-list {
-                    .user-panel-title {
-                        color: $white;
-
-                        h3 {
-                            color: $white;
-                        }
-                    }
-
-                    .table {
-                        color: $white;
-                        border: 1px solid rgba($blue, $alpha: 1);
-
-                        tbody {
-                            tr {
-                                border-bottom: 1px solid rgba($blue, $alpha: 1);
-
-                                td {
-                                    strong {
-                                        color: rgba($white, $alpha: 0.7);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            .access-device .icon img {
-                filter: invert(1);
-            }
+            border: 1px solid rgba($accent-orange, 0.3);
         }
-    }
-
-    .site-alert {
-        background: rgba($blue, $alpha: 0.7);
-        color: rgba($white, $alpha: 0.8);
-    }
-
-    .side-wallet-box {
-        background: #041f2c;
-        color: rgba($white, $alpha: 0.8);
-
-        .user-balance-card {
-            &::before {
-                background: rgba($yellow, $alpha: 0.4);
-            }
+        .dataTables_paginate .pagination .paginate_button .page-link {
+            background: $primary-background;
+            color: rgba($white, 0.7);
+            border-color: rgba($accent-orange, 0.2);
+            &:hover { background: rgba($accent-orange, 0.2); color: $accent-orange; }
         }
-    }
-
-    .btn-link {
-        color: $primary;
-    }
-
-    .site-transactions {
-        .single {
-            background: #041f2c;
-
-            .left {
-                .icon {
-                    background: $blue;
-                    color: $white;
-                }
-
-                .content {
-                    .date {
-                        color: rgba($white, $alpha: 0.4);
-                    }
-                }
-            }
-
-            &.head {
-                background: transparent;
-            }
-        }
-    }
-
-    .site-pagination {
-        .page-item {
-            .page-link {
-                color: rgba($white, $alpha: 0.5);
-                font-size: 14px;
-                font-weight: 700;
-                background: $blue;
-                border-color: $blue;
-            }
-
-            &.active {
-                .page-link {
-                    background: $primary;
-                    color: $white;
-                }
-            }
-        }
-    }
-
-    .single-investment-plan {
-        p {
-            color: rgba($yellow, $alpha: 0.8);
-        }
-    }
-
-    .site-datatable {
-        .dataTables_length {
-            label {
-                font-weight: 700 !important;
-
-                select {
-                    &:focus {
-                        box-shadow: none;
-                        border: 1px solid rgba($primary, $alpha: 0.5);
-                    }
-                }
-            }
-        }
-
-        .dataTables_filter {
-            label {
-                input {
-                    background: transparent;
-                    color: $white;
-
-                    &:focus {
-                        box-shadow: none;
-                        border: 1px solid rgba($white, $alpha: 0.5);
-                    }
-                }
-            }
-        }
-
-        .dataTables_info {
-            color: rgba($white, $alpha: 0.7);
-        }
-
-        .dataTables_paginate {
-            .pagination {
-                .paginate_button {
-                    .page-link {
-                        background: $blue;
-                        color: rgba($white, $alpha: 0.7);
-                        border-color: $blue;
-
-                        &:hover {
-                            background: $primary;
-                            color: $white;
-                        }
-
-                        &:focus {
-                            box-shadow: none;
-                        }
-                    }
-
-                    &.active {
-                        .page-link {
-                            background: $primary;
-                            color: $white;
-                            border-color: $primary;
-                        }
-                    }
-                }
-            }
-        }
-
-        .data-table {
-            background: $blue;
-            box-shadow: 0px 0px 2px #aab0c6;
-
-            thead {
-                tr {
-                    th {
-                        border-bottom: 1px solid rgba($white, $alpha: 0.1);
-                        color: rgba($white, $alpha: 0.7);
-                        background: rgba($white, $alpha: 0.1);
-                    }
-                }
-            }
-
-            tbody {
-                tr {
-                    td {
-                        border-bottom: 1px solid rgba($white, $alpha: 0.1);
-                        color: $white;
-
-                        .avatar-text {
-                            color: $white;
-                        }
-
-                        .form-switch {
-                            input {
-                                &.form-check-input:checked {
-                                    background-color: $primary;
-                                    border-color: $primary;
-                                }
-                            }
-                        }
-
-                        .site-badge {
-                            color: $white;
-
-                            &.success {
-                                background: $green;
-                            }
-
-                            &.failed {
-                                background: $red;
-                            }
-
-                            &.warnning {
-                                background: $yellow;
-                                color: $black;
-                            }
-                        }
-
-                        .link {
-                            color: $primary;
-
-                            &:hover {
-                                color: $green;
-                            }
-                        }
-
-                        .investment-timeline {
-                            background: $gray;
-
-                            .progress-bar {
-                                background: $red;
-                            }
-                        }
-
-                        .table-description {
-                            .icon {
-                                background: rgba($blue3, $alpha: 0.7);
-                                color: $white;
-                            }
-                        }
-
-                        .date {
-                            color: rgba($white, $alpha: 0.75);
-                        }
-                    }
-
-                    &:hover {
-                        background: rgba($white, $alpha: 0.02);
-                    }
-                }
-            }
-        }
-    }
-
-    .progress-steps-form {
-        .transaction-status {
-            background: $blue;
+        .dataTables_paginate .pagination .paginate_button.active .page-link {
+            background: $accent-orange;
             color: $white;
+            border-color: $accent-orange;
         }
 
-        .input-group {
-            .site-nice-select {
-                background: #041f2c;
-                border-color: rgba($white, $alpha: 0.2);
-
-                .list {
-                    background: $blue;
-                    color: $white;
-
-                    li {
-                        &.selected {
-                            background: $blue2;
-                            color: $white;
-                        }
-
-                        &:hover {
-                            background: $blue2;
-                            color: $white;
-                        }
-                    }
+        .data-table { // Specific table styling
+            background: $secondary-background;
+            border-color: rgba($accent-orange,0.2);
+            box-shadow: 0 0 10px rgba($accent-orange,0.1);
+            thead tr th {
+                border-color: $accent-orange;
+                color: $accent-orange;
+                background: rgba($accent-orange, 0.05);
+            }
+            tbody tr {
+                td {
+                    border-color: rgba($accent-orange, 0.1);
+                    color: rgba($white,0.8);
+                     .table-description .icon { background:rgba($white,0.1); color:$accent-orange;}
                 }
-
-                &::after {
-                    border-bottom: 2px solid rgba($white, $alpha: 0.5);
-                    border-right: 2px solid rgba($white, $alpha: 0.5);
-                    height: 8px;
-                    width: 8px;
-                }
+                &:hover { background-color: rgba($accent-orange,0.03); }
             }
         }
     }
 
-    .wrap-custom-file {
-        label {
-            span {
-                color: $white;
-            }
-        }
+    .progress-steps-form .transaction-status { // Transaction status box
+        background: $secondary-background;
+        border: 1px solid rgba($accent-orange,0.2);
+        color: $white;
     }
 
-    .single-badge {
-        border: 2px solid rgba($white, $alpha: 0.1);
-
-        .content {
-            .description {
-                color: rgba($white, $alpha: 0.4);
-            }
-        }
-    }
-
-    .earnings-calculator {
-        background: #032836;
-
+    .earnings-calculator { // Calculator on main site if any
+        background: $secondary-background;
+        box-shadow: 0 0 15px rgba($accent-orange,0.2);
         .single-box {
-            label {
-                color: rgba($white, $alpha: 0.5);
-            }
-
+            label { color: rgba($white, $alpha: 0.8); }
             .input-group {
-                .form-control {
-                    border-color: rgba($white, $alpha: 0.2);
-                    color: $white;
-                }
-
-                .input-group-text {
-                    border-color: rgba($white, $alpha: 0.2);
-                    color: rgba($white, $alpha: 0.5);
-                }
+                .form-control { border-color: rgba($accent-orange,0.3); background:$primary-background; color: $white; }
+                .input-group-text { border-color: $accent-orange; background:$accent-orange; color: $white; }
             }
-
-            .site-nice-select {
-                background: transparent;
-                border-color: rgba($white, $alpha: 0.2);
-
-                .current {
-                    color: $white;
-                    font-weight: 500;
-                    font-size: 16px;
-                    line-height: 46px;
+            .site-nice-select { // Custom select in calculator
+                background: $primary-background;
+                border-color: rgba($accent-orange, 0.3);
+                .current { color: $white; }
+                .list { background: $primary-background; border:1px solid $accent-orange;
+                    li { color:$white; &:hover{background:rgba($accent-orange,0.2);color:$accent-orange;}}
+                     li.selected{background:$accent-orange;color:$white;}
                 }
-
-                .list {
-                    background: $blue;
-                    color: $white;
-                    width: 100%;
-
-                    li {
-                        &.selected {
-                            background: $blue2;
-                            color: $white;
-                        }
-
-                        &:hover {
-                            background: $blue2;
-                            color: $white;
-                        }
-                    }
-                }
-
-                &::after {
-                    border-bottom: 2px solid rgba($white, $alpha: 0.5);
-                    border-right: 2px solid rgba($white, $alpha: 0.5);
-                    height: 8px;
-                    width: 8px;
-                }
+                &::after { border-color: rgba($white,0.6); }
             }
         }
     }
 
-    .support-ticket-single-message {
-        background: $blue;
-
-        .message-attachments {
-            .single-attachment {
-                .attach {
-                    a {
-                        color: $green;
-                    }
-                }
-            }
-        }
+    .support-ticket-single-message { // Support ticket messages
+        background: $secondary-background;
+        border: 1px solid rgba($accent-orange,0.2);
+        color: rgba($white,0.8);
+        .message-attachments .single-attachment .attach a { color: $accent-orange; &:hover{color:color.adjust($accent-orange, $lightness: -10%);} }
     }
 
-    .about-us {
-        .about-content {
-            .content {
-                color: rgba($white, $alpha: 0.5);
-            }
-        }
-    }
+    .about-us .about-content .content { color: rgba($white, $alpha: 0.8); } // About us page text
 
-    .site-form {
-        form {
-            input,
-            textarea {
-                border: 2px solid rgba($white, $alpha: 0.1);
-                color: $white;
-
-                &:focus {
-                    border: 2px solid rgba($white, $alpha: 0.2);
-                }
-
-                &:focus-visible {
-                    border: 2px solid rgba($white, $alpha: 0.2);
-                }
-
-                &::placeholder {
-                    color: rgba($white, $alpha: 0.4);
-                }
-            }
-
-            select {
-                background: rgba($white, $alpha: 0.5);
-                border: 2px solid rgba($white, $alpha: 0.1);
-                color: rgba($white, $alpha: 0.4);
-
-                &:focus {
-                    border: 2px solid rgba($white, $alpha: 0.2);
-                }
-            }
-
-            .extra-links {
-                a {
-                    color: rgba($black, $alpha: 0.5);
-                }
-            }
-        }
-    }
-
-    .site-tab-bars {
-        background: rgba($blue, $alpha: 1);
-
-        ul {
-            li {
-                display: inline-block;
-                @media (max-width: 991px) {
-                    margin-bottom: 10px;
-                    margin-right: 10px;
-                }
-
-                a {
-                    color: $blue;
-                    font-weight: 700;
-                    font-size: 14px;
-                    padding: 8px 16px;
-                    border-radius: 4px;
-
-                    svg {
-                        width: 16px;
-                        position: relative;
-                        margin-right: 5px;
-                        top: -1px;
-                    }
-
-                    &:hover {
-                        color: $primary;
-                    }
-
-                    @media (max-width: 575px) {
-                        background: rgba($primary, $alpha: 0.2);
-                        display: block;
-                    }
-                }
-
-                &.active {
-                    a {
-                        background: $primary;
-                        color: $white;
-                    }
-                }
-            }
-        }
-
-        .nav {
-            &.nav-pills {
-                .nav-item {
-                    .nav-link {
-                        color: rgba($white, $alpha: 0.6);
-
-                        &.active {
-                            background: $primary;
-                            color: $white;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .caches-privacy {
-        background: $blue3;
-    }
-
-    .site-sidebar {
-        .single-sidebar {
+    .site-form form { // General forms on site
+        input, textarea, select {
+            border-color: rgba($accent-orange, $alpha: 0.3);
+            background: $primary-background;
             color: $white;
-            border: 2px solid rgba($white, $alpha: 0.2);
-
-            form {
-                input {
-                    border: 2px solid rgba($white, $alpha: 0.2);
-                    background: rgba($white, $alpha: 0.2);
-                    color: $white;
-                }
-            }
+            &::placeholder { color: rgba($white, $alpha:0.5); }
+            &:focus { border-color: $accent-orange; box-shadow: 0 0 5px rgba($accent-orange,0.3); }
+        }
+         button[type="submit"] { // General submit buttons
+            @extend .site-btn;
+            background: $gradient-primary-blue;
+            &:hover { background: $gradient-start-mining;}
         }
     }
 
+    .site-tab-bars { // Tab navigation bars
+        background: $secondary-background;
+        border: 1px solid rgba($accent-orange,0.2);
+        ul li a {
+            color: rgba($white,0.7);
+            &:hover { color: $accent-orange; background:rgba($accent-orange,0.1);}
+        }
+        ul li.active a {
+            background: $accent-orange;
+            color: $white;
+        }
+         .nav.nav-pills .nav-item .nav-link {
+            color: rgba($white,0.7);
+            &.active { background:$accent-orange; color:$white;}
+        }
+    }
+
+    .caches-privacy { // Cookie consent bar
+        background: $secondary-background;
+        border: 1px solid $accent-orange;
+        box-shadow: 0 -2px 10px rgba($accent-orange,0.1);
+        color: $white;
+         button { // Assuming buttons here use .site-btn
+            @extend .site-btn;
+        }
+    }
+
+    // Ensure sidebar on blog pages is dark-themed
+    .site-sidebar .single-sidebar {
+        background: $secondary-background;
+        border-color: rgba($accent-orange,0.2);
+        color: $white;
+        h3 {color:$white;}
+        form input {
+            background:$primary-background;
+            border-color:rgba($accent-orange,0.3);
+            color:$white;
+             &::placeholder{color:rgba($white,0.5);}
+             &:focus{border-color:$accent-orange;}
+        }
+        form button { color:rgba($white,0.7); &:hover{color:$accent-orange;}}
+        ul li a {
+            background:rgba($accent-orange,0.1);
+            color:$accent-orange;
+            &:hover{background:$accent-orange;color:$white;}
+        }
+    }
     .blog-details {
-        color: rgba($white, $alpha: 0.5);
-
+        color:rgba($white,0.8);
         .blockquote {
-            color: $white;
+            background:$secondary-background;
+            border-color:$accent-orange;
+            color:rgba($white,0.9);
         }
     }
-
-    .post-share-and-tag {
-        .social {
-            color: $white;
-
-            a {
-                color: $white;
-            }
-        }
+    .post-share-and-tag .social {
+        color:$white;
+        a {color:$white; &:hover{color:$accent-orange;}}
+    }
+     .input-icon { // Icons inside input fields
+        color: rgba($white, $alpha: 0.5); // Make sure it's visible on dark inputs
     }
 }
